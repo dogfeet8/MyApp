@@ -3,4 +3,5 @@ export interface Webtoon {
   title: string;
   img: string;
   author: string;
+  fanCount: number;
 }
