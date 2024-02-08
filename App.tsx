@@ -1,78 +1,37 @@
-import { useState } from 'react';
-import { Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Box,
+  Center,
+  GluestackUIProvider,
+  HStack,
+  Image,
+  ScrollView,
+  Text,
+  VStack,
+} from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
+import Swiper from 'react-native-swiper';
+import { Dimensions } from 'react-native';
+import { useEffect } from 'react';
+import { useQuery, QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import MySwiper from './components/MySwiper';
+import LargeView from './components/Card/LargeView';
+
+const queryClient = new QueryClient();
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
-  const handleAdd = () => {
-    setCount(count + 1);
-  };
-
-  const handleMinus = () => {
-    setCount(count - 1);
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.titleText}>This is My Counter</Text>
-      </View>
-      <View style={styles.box}>
-        <Text style={styles.numberText}>{count}</Text>
-      </View>
-      <View style={styles.box}>
-        <TouchableOpacity style={styles.buttonMinus} onPress={handleMinus} disabled={count === 0}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonPlus} onPress={handleAdd} disabled={count === 10}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <GluestackUIProvider config={config}>
+        <ScrollView width='100%' flex={1} bg='$backgroundDark900'>
+          <HStack width='100%'>
+            <Center width='100%' height={350}>
+              <MySwiper />
+            </Center>
+            <VStack bg='red'></VStack>
+            <HStack width='100%' bg='$red100' h={1000}></HStack>
+          </HStack>
+        </ScrollView>
+      </GluestackUIProvider>
+    </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eeeeee',
-  },
-  box: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 20,
-  },
-  titleText: {
-    fontSize: 30,
-    fontWeight: '800',
-  },
-  numberText: {
-    fontSize: 100,
-    fontWeight: '800',
-    color: '#33691e',
-  },
-  buttonMinus: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#ffa726',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonPlus: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#4fc3f7',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 50,
-    fontWeight: '800',
-    paddingBottom: 3,
-  },
-});
