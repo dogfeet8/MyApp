@@ -5,3 +5,9 @@ export interface Webtoon {
   author: string;
   fanCount: number;
 }
+
+export type ScreensParams = {
+  ScreenOne: undefined;
+  ScreenTwo: undefined;
+  ScreenThree: undefined;
+};
