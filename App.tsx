@@ -1,78 +1,43 @@
-import { useState } from 'react';
-import { Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { config } from '@gluestack-ui/config';
+import { GluestackUIProvider, SafeAreaView, StatusBar } from '@gluestack-ui/themed';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ScreenOne from './screens/ScreenOne';
+import ScreenTwo from './screens/ScreenTwo';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import ScreenThree from './screens/ScreenThree';
+import { ScreensParams } from './types';
+
+const queryClient = new QueryClient();
+const Stack = createStackNavigator<ScreensParams>();
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
-  const handleAdd = () => {
-    setCount(count + 1);
-  };
-
-  const handleMinus = () => {
-    setCount(count - 1);
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.titleText}>This is My Counter</Text>
-      </View>
-      <View style={styles.box}>
-        <Text style={styles.numberText}>{count}</Text>
-      </View>
-      <View style={styles.box}>
-        <TouchableOpacity style={styles.buttonMinus} onPress={handleMinus} disabled={count === 0}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonPlus} onPress={handleAdd} disabled={count === 10}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <StatusBar barStyle='light-content' />
+      <GluestackUIProvider config={config}>
+        <SafeAreaView flex={1} bg='$backgroundDark950'>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name='ScreenOne'
+                component={ScreenOne}
+                options={{ header: () => null }}
+              />
+              <Stack.Screen
+                name='ScreenTwo'
+                component={ScreenTwo}
+                options={{ header: () => null }}
+              />
+              <Stack.Screen
+                name='ScreenThree'
+                component={ScreenThree}
+                options={{ header: () => null }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </GluestackUIProvider>
+    </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eeeeee',
-  },
-  box: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 20,
-  },
-  titleText: {
-    fontSize: 30,
-    fontWeight: '800',
-  },
-  numberText: {
-    fontSize: 100,
-    fontWeight: '800',
-    color: '#33691e',
-  },
-  buttonMinus: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#ffa726',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonPlus: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#4fc3f7',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 50,
-    fontWeight: '800',
-    paddingBottom: 3,
-  },
-});
