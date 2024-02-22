@@ -2,12 +2,8 @@ import Swiper from 'react-native-swiper';
 import { Dimensions } from 'react-native';
 import { Box } from '@gluestack-ui/themed';
 import { useQuery } from '@tanstack/react-query';
-import { Webtoon } from '../../types';
+import { Webtoon, WebtoonResponse } from '../../types';
 import LargeCard from '../Card/LargeCard';
-
-interface WebtoonResponse {
-  webtoons: Webtoon[];
-}
 
 const fetchWebtoons = async () => {
   const res = await fetch('https://korea-webtoon-api.herokuapp.com');
