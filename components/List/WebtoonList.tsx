@@ -18,7 +18,7 @@ const WebtoonList = () => {
     queryFn: fetchWebtoons,
   });
   return (
-    <VStack gap='$2' px='$3' mt='$5'>
+    <VStack gap='$2' px='$3' mt='$5' mb={10}>
       {data &&
         data.webtoons.map((webtoon) => <MediumCard key={webtoon.webtoonId} webtoon={webtoon} />)}
     </VStack>
