@@ -1,9 +1,9 @@
 import { Button, Center, Text } from '@gluestack-ui/themed';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { ScreensParams } from '../types';
+import { CounterScreensParams } from '../types';
 
 export default function ScreenOne() {
-  const navigation = useNavigation<NavigationProp<ScreensParams>>();
+  const navigation = useNavigation<NavigationProp<CounterScreensParams>>();
 
   return (
     <Center width='$full' height='$full' bg='$blue300' gap={10}>
