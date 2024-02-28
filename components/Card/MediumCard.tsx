@@ -1,48 +1,17 @@
-import {
-  StarIcon,
-  HStack,
-  Icon,
-  Image,
-  Text,
-  VStack,
-  Pressable,
-  Button,
-  ButtonIcon,
-  SearchIcon,
-  CloseIcon,
-} from '@gluestack-ui/themed';
+import { StarIcon, HStack, Icon, Image, Text, VStack, Pressable } from '@gluestack-ui/themed';
 import { ScreensParams, Webtoon } from '../../types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 interface MediumCardProps {
   webtoon: Webtoon;
-  showCloseButton?: boolean;
-  onPressClose?: () => void;
 }
 
-const MediumCard = ({ webtoon, showCloseButton, onPressClose }: MediumCardProps) => {
+const MediumCard = ({ webtoon }: MediumCardProps) => {
   const navigation = useNavigation<NavigationProp<ScreensParams>>();
+  console.log(webtoon);
   return (
     <HStack borderWidth='$1' borderColor='$backgroundLight700'>
-      {showCloseButton && (
-        <Button
-          position='absolute'
-          right={0}
-          top={0}
-          size='md'
-          zIndex={1}
-          width={6}
-          bg='#00000000'
-          onPress={onPressClose}
-        >
-          <ButtonIcon as={CloseIcon} />
-        </Button>
-      )}
-      <Pressable
-        flexDirection='row'
-        flex={1}
-        onPress={() => navigation.navigate('Detail', { webtoon })}
-      >
+      <Pressable flexDirection='row' onPress={() => navigation.navigate('Detail', { webtoon })}>
         <Image
           bg='$backgroundLight700'
           alt={webtoon.title}
