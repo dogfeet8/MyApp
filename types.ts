@@ -16,6 +16,12 @@ export type CounterScreensParams = {
 export type ScreensParams = {
   Main: undefined;
   Search: undefined;
+  Detail: { webtoon?: Webtoon };
+};
+
+export type TabScreenParams = {
+  webtoon: undefined;
+  my: undefined;
 };
 
 export interface WebtoonResponse {
