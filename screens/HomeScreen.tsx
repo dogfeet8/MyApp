@@ -8,7 +8,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp<ScreensParams>>();
   return (
-    <ScrollView flex={1} width='$full' bg='$backgroundDark950'>
+    <ScrollView flex={1} width='$full' bg='$backgroundDark900'>
       <Box position='absolute' right={10} top={10} zIndex={10}>
         <Button
           borderRadius='$full'

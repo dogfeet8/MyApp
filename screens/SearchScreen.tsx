@@ -32,7 +32,7 @@ export default function SearchScreen() {
   const searchedWebtoons = data?.webtoons || [];
 
   return (
-    <VStack width='$full' height='$full' bg='$backgroundDark950'>
+    <VStack width='$full' height='$full' bg='$backgroundDark900'>
       <HStack gap={10} p={20}>
         <Input variant='outline' size='md' width={150} flex={1}>
           <InputField
@@ -53,7 +53,7 @@ export default function SearchScreen() {
           <ButtonText>취소</ButtonText>
         </Button>
       </HStack>
-      <ScrollView flex={1} width='$full' bg='$backgroundDark950'>
+      <ScrollView flex={1} width='$full' bg='$backgroundDark900'>
         <VStack gap={12} px={20}>
           {searchedWebtoons.map((webtoon) => (
             <MediumCard key={webtoon.webtoonId} webtoon={webtoon} />
