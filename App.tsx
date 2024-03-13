@@ -1,16 +1,16 @@
 import { config } from '@gluestack-ui/config';
-import { GluestackUIProvider, SafeAreaView, StatusBar } from '@gluestack-ui/themed';
+import { GluestackUIProvider, SafeAreaView, StatusBar, View } from '@gluestack-ui/themed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScreensParams, TabScreenParams } from './types';
-import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyScreen from './screens/MyScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import WebtoonDetailScreen from './screens/WebtoonDetailScreen';
 import DetailHeader from './components/Header/DetailHeader';
+import WebtoonScreen from './screens/WebtoonScreen';
 
 const queryClient = new QueryClient();
 const Stack = createStackNavigator<ScreensParams>();
@@ -27,7 +27,7 @@ const Tabs = () => (
   >
     <Tab.Screen
       name='webtoon'
-      component={HomeScreen}
+      component={WebtoonScreen}
       options={{
         title: '웹툰',
         tabBarIcon: ({ color, size }) => <Ionicons name='list' size={size} color={color} />,
@@ -49,7 +49,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <StatusBar barStyle='light-content' />
       <GluestackUIProvider config={config}>
-        <SafeAreaView flex={1} bg='$backgroundDark900'>
+        <View flex={1} bg='$backgroundDark900'>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name='Main' component={Tabs} />
@@ -62,7 +62,8 @@ export default function App() {
               />
             </Stack.Navigator>
           </NavigationContainer>
-        </SafeAreaView>
+        </View>
+        <SafeAreaView bg='$backgroundDark900' />
       </GluestackUIProvider>
     </QueryClientProvider>
   );
