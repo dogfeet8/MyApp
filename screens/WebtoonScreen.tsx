@@ -4,7 +4,7 @@ import WebtoonCarousel from '../components/Carousel/WebtoonCarousel';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { useState } from 'react';
 import { DayArray } from '../constants';
-import WeekDayList from '../components/Weekday/WeekDayList';
+import WeekDayList from '../components/WeekDay/WeekDayList';
 
 export default function WebtoonScreen() {
   const [index, setIndex] = useState(0);

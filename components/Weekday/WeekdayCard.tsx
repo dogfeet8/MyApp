@@ -1,66 +1,63 @@
-import { Center, HStack, Text, VStack } from '@gluestack-ui/themed';
-import { WeekdayWebtoon } from '../../types';
-import { Dimensions } from 'react-native';
+import { Center, HStack, Pressable, Text, VStack } from '@gluestack-ui/themed';
+import { DetailScreenParams, WeekdayWebtoon } from '../../types';
 import { Image } from 'expo-image';
 import convertUrl from '../../utils/convertUrl';
+import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { BlurHash } from '../../constants';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 interface WeekDayCardProps {
   webtoon: WeekdayWebtoon;
 }
 
-const width = Dimensions.get('window').width / 3;
+const width = Dimensions.get('window').width;
 
-const WeekdayCard = ({ webtoon }: WeekDayCardProps) => {
+const WeekDayCard = ({ webtoon }: WeekDayCardProps) => {
+  const navigation = useNavigation<NavigationProp<DetailScreenParams>>();
   return (
-    <VStack w={width} height={width * 1.5} p='$1'>
-      <Image
-        transition={500}
-        alt={webtoon.titleName}
-        source={{
-          uri: convertUrl(webtoon.thumbnailUrl),
-        }}
-        style={{ flex: 1, width: '100%' }}
-        placeholder={BlurHash}
-      ></Image>
-      <VStack position='absolute' top={6} left={6} gap='$1'>
-        {/* 신작 */}
-        {webtoon.new && (
-          <Center h={24} w={24} borderRadius='$full' bg='$green500'>
-            <Text color='black' size='xs'>
-              신작
+    <VStack w={width / 3}>
+      <Pressable onPress={() => navigation.navigate('Detail', { titleId: webtoon.titleId })}>
+        <Image
+          transition={1000}
+          source={{ uri: convertUrl(webtoon.thumbnailUrl) }}
+          style={{ width: '100%', height: (width / 3) * 1.4 }}
+        ></Image>
+        <VStack position='absolute' p={4} gap={1}>
+          {webtoon.new && (
+            <Center w={24} h={24} bg='$green500' borderRadius='$full'>
+              <Text color='$black' size='xs'>
+                신작
+              </Text>
+            </Center>
+          )}
+          {webtoon.bm && (
+            <Center w={24} h={24} bg='$black' borderRadius='$full' px={2} py={1}>
+              <Icon size={22} name='timer-sharp' color='#22c55e'></Icon>
+            </Center>
+          )}
+          {webtoon.adult && (
+            <Center w={24} h={24} bg='$black' borderRadius='$full' px={2} py={1}>
+              <Icon size={22} name='male-female-sharp' color='#991b1b'></Icon>
+            </Center>
+          )}
+        </VStack>
+        <VStack gap={-4} p={2}>
+          <Text color='$white' size='sm' isTruncated={true}>
+            {webtoon.titleName}
+          </Text>
+          <HStack alignItems='center'>
+            <Text maxWidth={width / 3 - 30} color='$white' size='xs' isTruncated={true}>
+              {webtoon.author}
             </Text>
-          </Center>
-        )}
-        {webtoon.bm && (
-          <Center h={24} w={24} borderRadius='$full' bg='black' px={2}>
-            <Icon size={22} name='timer-sharp' color='#22c55e'></Icon>
-          </Center>
-        )}
-        {webtoon.adult && (
-          <Center h={24} w={24} borderRadius='$full' bg='black' px={2}>
-            <Icon size={22} name='male-female-sharp' color='#991b1b'></Icon>
-          </Center>
-        )}
-      </VStack>
-
-      <VStack gap={-4}>
-        <Text color='white' size='sm' isTruncated={true}>
-          {webtoon.titleName}
-        </Text>
-        <HStack alignItems='center'>
-          <Text color='white' size='xs' maxWidth={width - 40} isTruncated={true}>
-            {webtoon.author}
-          </Text>
-          <Icon size={10} name='star-sharp' color='white' style={{ marginBottom: 2 }}></Icon>
-          <Text color='white' size='xs' isTruncated={true}>
-            {webtoon.starScore.toFixed(2)}
-          </Text>
-        </HStack>
-      </VStack>
+            <Icon size={10} name='star-sharp' color='white'></Icon>
+            <Text w={30} color='$white' size='xs'>
+              {webtoon.starScore.toFixed(2)}
+            </Text>
+          </HStack>
+        </VStack>
+      </Pressable>
     </VStack>
   );
 };
 
-export default WeekdayCard;
+export default WeekDayCard;
