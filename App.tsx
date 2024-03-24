@@ -4,13 +4,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScreensParams, TabScreenParams } from './types';
-import SearchScreen from './screens/SearchScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyScreen from './screens/MyScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import WebtoonDetailScreen from './screens/WebtoonDetailScreen';
-import DetailHeader from './components/Header/DetailHeader';
 import WebtoonScreen from './screens/WebtoonScreen';
+import DetailScreen from './screens/DetailScreen';
 
 const queryClient = new QueryClient();
 const Stack = createStackNavigator<ScreensParams>();
@@ -53,13 +51,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name='Main' component={Tabs} />
-              <Stack.Screen name='Search' component={SearchScreen} />
-              <Stack.Screen
-                name='Detail'
-                component={WebtoonDetailScreen}
-                initialParams={{ webtoon: undefined }}
-                options={{ header: () => <DetailHeader />, headerShown: true }}
-              />
+              <Stack.Screen name='Detail' component={DetailScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
