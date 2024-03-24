@@ -20,9 +20,7 @@ export default function DetailScreen() {
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<ArticleResponse>({
     queryKey: ['articleList', titleId],
-    queryFn: ({ pageParam = 1 }) => {
-      return fetchWebtoonArticleList(titleId, pageParam as number);
-    },
+    queryFn: ({ pageParam }) => fetchWebtoonArticleList(titleId, pageParam as number),
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.pageInfo?.totalPages === lastPage.pageInfo?.page || !lastPage.pageInfo
@@ -30,12 +28,8 @@ export default function DetailScreen() {
         : lastPage.pageInfo.page + 1,
   });
 
-  const handleScrollEnd = () => {
-    fetchNextPage();
-  };
-
   return (
-    <ScrollView bg='$backgroundDark900' onMomentumScrollEnd={handleScrollEnd}>
+    <ScrollView bg='$backgroundDark900' onMomentumScrollEnd={() => fetchNextPage()}>
       <VStack pb={40}>
         <DetailHeader titleId={titleId} />
         <Divider my='$2' bgColor='$secondary500' />
