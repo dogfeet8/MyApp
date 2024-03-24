@@ -173,10 +173,10 @@ export interface ArticleResponse {
   finished: boolean;
   dailyPass: boolean;
   chargeBestChallenge: boolean;
-  articleList: Article[];
+  articleList?: Article[];
   chargeFolderArticleList: Article[];
   chargeFolderUp: boolean;
-  pageInfo: {
+  pageInfo?: {
     totalRows: number;
     pageSize: number;
     indexSize: number;
