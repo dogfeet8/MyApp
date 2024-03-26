@@ -9,6 +9,7 @@ import MyScreen from './screens/MyScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import WebtoonScreen from './screens/WebtoonScreen';
 import DetailScreen from './screens/DetailScreen';
+import Header from './components/Detail/Header';
 
 const queryClient = new QueryClient();
 const Stack = createStackNavigator<ScreensParams>();
@@ -51,7 +52,11 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name='Main' component={Tabs} />
-              <Stack.Screen name='Detail' component={DetailScreen} />
+              <Stack.Screen
+                name='Detail'
+                component={DetailScreen}
+                options={{ headerShown: true, header: () => <Header /> }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </View>

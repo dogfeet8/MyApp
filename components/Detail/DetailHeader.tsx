@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  ButtonIcon,
-  Center,
-  ChevronLeftIcon,
-  HStack,
-  Text,
-  VStack,
-} from '@gluestack-ui/themed';
+import { Box, Center, HStack, Text, VStack } from '@gluestack-ui/themed';
 import { DetailScreenParams, WebtoonDetail } from '../../types';
 import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
@@ -41,17 +32,6 @@ const DetailHeader = ({ titleId }: DetailHeaderProps) => {
 
   return (
     <VStack w='$full'>
-      <Button
-        position='absolute'
-        top={35}
-        left={8}
-        zIndex={10}
-        bg='#00000000'
-        w={1}
-        onPress={() => navigation.goBack()}
-      >
-        <ButtonIcon as={ChevronLeftIcon} size='xl' />
-      </Button>
       <Box>
         <Box position='absolute' w={'$full'} h={width / 2} bg='$blueGray500'></Box>
         <Image
