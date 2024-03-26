@@ -22,6 +22,7 @@ export type ScreensParams = {
 export type DetailScreenParams = {
   Main: undefined;
   Detail: { titleId: number };
+  Viewer: { article: Article };
 };
 
 export type TabScreenParams = {
@@ -191,4 +192,8 @@ export interface ArticleResponse {
     nextPage: number;
   };
   sort: string;
+}
+
+export interface ViewerResponse {
+  images: string[];
 }

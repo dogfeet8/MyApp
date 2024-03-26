@@ -3,16 +3,17 @@ import { GluestackUIProvider, SafeAreaView, StatusBar, View } from '@gluestack-u
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { ScreensParams, TabScreenParams } from './types';
+import { DetailScreenParams, ScreensParams, TabScreenParams } from './types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyScreen from './screens/MyScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import WebtoonScreen from './screens/WebtoonScreen';
 import DetailScreen from './screens/DetailScreen';
 import Header from './components/Detail/Header';
+import WebtoonViewScreen from './screens/WebtoonViewScreen';
 
 const queryClient = new QueryClient();
-const Stack = createStackNavigator<ScreensParams>();
+const Stack = createStackNavigator<DetailScreenParams>();
 const Tab = createBottomTabNavigator<TabScreenParams>();
 
 const Tabs = () => (
@@ -55,7 +56,12 @@ export default function App() {
               <Stack.Screen
                 name='Detail'
                 component={DetailScreen}
-                options={{ headerShown: true, header: () => <Header /> }}
+                options={{ headerShown: true, header: () => <Header color='white' /> }}
+              />
+              <Stack.Screen
+                name='Viewer'
+                component={WebtoonViewScreen}
+                options={{ headerShown: true, header: () => <Header color='$secondary600' /> }}
               />
             </Stack.Navigator>
           </NavigationContainer>
